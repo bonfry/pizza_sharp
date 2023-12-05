@@ -16,7 +16,7 @@ DECLIT: ('0' | [1-9][0-9]*) '.' [0-9]+;
 PLUS: 'piu';
 MINUS: 'meno';
 TIMES: 'per';
-DIVISION: 'diviso';
+DIVIDE: 'diviso';
 ASSIGN: 'uguale';
 LPAREN: '(';
 RPAREN: ')';

@@ -12,7 +12,7 @@ class PizzaSharpLexer extends Lexer {
   static const int
     TOKEN_NEWLINE = 1, TOKEN_WS = 2, TOKEN_VAR = 3, TOKEN_PRINT = 4, TOKEN_INTLIT = 5, 
     TOKEN_DECLIT = 6, TOKEN_PLUS = 7, TOKEN_MINUS = 8, TOKEN_TIMES = 9, 
-    TOKEN_DIVISION = 10, TOKEN_ASSIGN = 11, TOKEN_LPAREN = 12, TOKEN_RPAREN = 13, 
+    TOKEN_DIVIDE = 10, TOKEN_ASSIGN = 11, TOKEN_LPAREN = 12, TOKEN_RPAREN = 13, 
     TOKEN_ID = 14;
   @override
   final List<String> channelNames = [
@@ -27,7 +27,7 @@ class PizzaSharpLexer extends Lexer {
   @override
   final List<String> ruleNames = [
     'NEWLINE', 'WS', 'VAR', 'PRINT', 'INTLIT', 'DECLIT', 'PLUS', 'MINUS', 
-    'TIMES', 'DIVISION', 'ASSIGN', 'LPAREN', 'RPAREN', 'ID'
+    'TIMES', 'DIVIDE', 'ASSIGN', 'LPAREN', 'RPAREN', 'ID'
   ];
 
   static final List<String?> _LITERAL_NAMES = [
@@ -36,7 +36,7 @@ class PizzaSharpLexer extends Lexer {
   ];
   static final List<String?> _SYMBOLIC_NAMES = [
       null, "NEWLINE", "WS", "VAR", "PRINT", "INTLIT", "DECLIT", "PLUS", 
-      "MINUS", "TIMES", "DIVISION", "ASSIGN", "LPAREN", "RPAREN", "ID"
+      "MINUS", "TIMES", "DIVIDE", "ASSIGN", "LPAREN", "RPAREN", "ID"
   ];
   static final Vocabulary VOCABULARY = VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
