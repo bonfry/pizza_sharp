@@ -1,7 +1,6 @@
 // Each AST element is wrapped as an element
 // We can dump each element to a String
 import 'package:antlr4/antlr4.dart';
-import 'package:pizza_sharp/antlr/PizzaSharpParser.dart';
 
 abstract class ParseTreeElement {
   String multiLineString([String indentation = ""]);

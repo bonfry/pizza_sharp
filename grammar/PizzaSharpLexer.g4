@@ -1,8 +1,8 @@
 lexer grammar PizzaSharpLexer;
 
 //White space
-NEWLINE: 'rn' | 'r' | 'n';
-WS: [t]+ -> skip;
+NEWLINE: '\r\n' | '\r' | '\n';
+WS: ('\t' | ' ')+ -> skip;
 
 //Keywords
 VAR: 'dato';

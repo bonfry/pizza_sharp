@@ -19,7 +19,7 @@ extension ParserRuleContextExtension on ParserRuleContext {
 extension ScriptFileContextExtension on ScriptFileContext {
   ScriptFile toAst([bool considerPosition = false]) {
     return ScriptFile(
-      lines().map((e) => e.statement()!.toAst()).toList(),
+      lines().map((e) => e.statement()!.toAst(considerPosition)).toList(),
       toPosition(considerPosition),
     );
   }
@@ -32,14 +32,14 @@ extension StatementContextExtension on StatementContext {
         final varDecl = statement.varDeclaration()!;
         return VarDeclaration(
           varDecl.assignment()!.ID()!.text!,
-          varDecl.assignment()!.expression()!.toAst(),
+          varDecl.assignment()!.expression()!.toAst(considerPosition),
           toPosition(considerPosition),
         );
       case AssignmentStatementContext statement:
         final assignment = statement.assignment()!;
         return Assignment(
           assignment.ID()!.text!,
-          assignment.expression()!.toAst(),
+          assignment.expression()!.toAst(considerPosition),
           toPosition(considerPosition),
         );
       default:
@@ -73,23 +73,23 @@ extension BinaryExpressionContextExtension on BinaryExpressionContext {
   Expression toAst([bool considerPosition = false]) {
     return switch (operator_) {
       PizzaSharpLexer.TOKEN_PLUS => SumExpression(
-          left: left!.toAst(),
-          right: right!.toAst(),
+          left: left!.toAst(considerPosition),
+          right: right!.toAst(considerPosition),
           position: toPosition(considerPosition),
         ),
       PizzaSharpLexer.TOKEN_MINUS => SubExpression(
-          left: left!.toAst(),
-          right: right!.toAst(),
+          left: left!.toAst(considerPosition),
+          right: right!.toAst(considerPosition),
           position: toPosition(considerPosition),
         ),
       PizzaSharpLexer.TOKEN_TIMES => MultiplicationExpression(
-          left: left!.toAst(),
-          right: right!.toAst(),
+          left: left!.toAst(considerPosition),
+          right: right!.toAst(considerPosition),
           position: toPosition(considerPosition),
         ),
       PizzaSharpLexer.TOKEN_DIVIDE => DivisionExpression(
-          left: left!.toAst(),
-          right: right!.toAst(),
+          left: left!.toAst(considerPosition),
+          right: right!.toAst(considerPosition),
           position: toPosition(considerPosition),
         ),
       _ => throw UnsupportedError('Unknown expression type')

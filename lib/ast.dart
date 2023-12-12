@@ -12,6 +12,34 @@ class Position {
   final Point end;
 
   Position(this.start, this.end);
+
+  operator <(Position other) {
+    return start.line < other.start.line ||
+        (start.line == other.start.line && start.column < other.start.column);
+  }
+
+  operator >(Position other) {
+    return start.line > other.start.line ||
+        (start.line == other.start.line && start.column > other.start.column);
+  }
+
+  operator <=(Position other) {
+    return start.line <= other.start.line ||
+        (start.line == other.start.line && start.column <= other.start.column);
+  }
+
+  operator >=(Position other) {
+    return start.line >= other.start.line ||
+        (start.line == other.start.line && start.column >= other.start.column);
+  }
+
+  operator ==(o) {
+    if (o is Position) {
+      return o.start == start && o.end == end;
+    } else {
+      return false;
+    }
+  }
 }
 
 Position pos(int startLine, int startColumn, int endLine, int endColumn) {

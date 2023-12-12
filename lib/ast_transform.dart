@@ -3,6 +3,26 @@ import 'package:pizza_sharp/ast.dart';
 typedef ProcessOperationCallback = void Function(Node node);
 typedef TransformOperationCallback = Node Function(Node node);
 
+extension NodeProcessExtension on Node {
+  void process(ProcessOperationCallback operation) {
+    operation(this);
+
+    switch (this) {
+      case ScriptFile scriptFile:
+        scriptFile.process(operation);
+        break;
+      case Statement statement:
+        statement.process(operation);
+        break;
+      case Expression expression:
+        expression.process(operation);
+        break;
+      default:
+        throw UnsupportedError('Unknown node type');
+    }
+  }
+}
+
 extension ScriptFileTransfromExtension on ScriptFile {
   void process(ProcessOperationCallback operation) {
     operation(this);
