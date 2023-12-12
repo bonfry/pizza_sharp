@@ -1,6 +1,7 @@
 // Each AST element is wrapped as an element
 // We can dump each element to a String
 import 'package:antlr4/antlr4.dart';
+import 'package:equatable/equatable.dart';
 
 abstract class ParseTreeElement {
   String multiLineString([String indentation = ""]);
@@ -9,7 +10,7 @@ abstract class ParseTreeElement {
 // To dump a leaf (which corresponds to a Terminal) we just write
 // T[...] and inside the square brackets we write the text corresponding
 // to the terminal
-class ParseTreeLeaf extends ParseTreeElement {
+class ParseTreeLeaf extends ParseTreeElement with EquatableMixin {
   final String text;
 
   ParseTreeLeaf({required this.text});
@@ -23,6 +24,10 @@ class ParseTreeLeaf extends ParseTreeElement {
   String multiLineString([String indentation = ""]) {
     return "${indentation}T[$text]\n";
   }
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [text];
 }
 
 // For nodes things are slightly more complex:
@@ -49,6 +54,9 @@ class ParseTreeNode extends ParseTreeElement {
 
     return string;
   }
+
+  @override
+  List<Object?> get props => [name, children];
 }
 
 // Given an AST node we wrap all the parts as elements:

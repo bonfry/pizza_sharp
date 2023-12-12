@@ -1,13 +1,21 @@
-abstract class Node {}
+import 'package:equatable/equatable.dart';
 
-class Point {
+abstract class Node with EquatableMixin {
+  @override
+  List<Object?> get props => [];
+}
+
+class Point extends Equatable {
   final int line;
   final int column;
 
   Point(this.line, this.column);
+
+  @override
+  List<Object?> get props => [line, column];
 }
 
-class Position {
+class Position extends Equatable {
   final Point start;
   final Point end;
 
@@ -33,13 +41,8 @@ class Position {
         (start.line == other.start.line && start.column >= other.start.column);
   }
 
-  operator ==(o) {
-    if (o is Position) {
-      return o.start == start && o.end == end;
-    } else {
-      return false;
-    }
-  }
+  @override
+  List<Object?> get props => [start, end];
 }
 
 Position pos(int startLine, int startColumn, int endLine, int endColumn) {
@@ -53,16 +56,7 @@ final class ScriptFile extends Node {
   ScriptFile(this.lines, [this.position]);
 
   @override
-  operator ==(o) {
-    if (o is ScriptFile) {
-      return o.lines == lines;
-    } else {
-      return false;
-    }
-  }
-
-  @override
-  int get hashCode => Object.hashAll(lines);
+  List<Object?> get props => [lines, position];
 }
 
 abstract class Statement extends Node {}
@@ -87,16 +81,7 @@ abstract class BinaryExpression extends Expression {
   BinaryExpression({required this.left, required this.right, this.position});
 
   @override
-  operator ==(o) {
-    if (o is BinaryExpression) {
-      return o.left == left && o.right == right;
-    } else {
-      return false;
-    }
-  }
-
-  @override
-  int get hashCode => Object.hashAll([left, right]);
+  List<Object?> get props => [left, right, position];
 }
 
 class SumExpression extends BinaryExpression {
@@ -138,16 +123,7 @@ class VarReference extends Expression {
   VarReference(this.varName, [this.position]);
 
   @override
-  operator ==(o) {
-    if (o is VarReference) {
-      return o.varName == varName;
-    } else {
-      return false;
-    }
-  }
-
-  @override
-  int get hashCode => varName.hashCode;
+  List<Object?> get props => [varName, position];
 }
 
 class IntLit extends Expression {
@@ -157,16 +133,7 @@ class IntLit extends Expression {
   IntLit(this.value, [this.position]);
 
   @override
-  operator ==(o) {
-    if (o is IntLit) {
-      return o.value == value;
-    } else {
-      return false;
-    }
-  }
-
-  @override
-  int get hashCode => value.hashCode;
+  List<Object?> get props => [value, position];
 }
 
 class DecLit extends Expression {
@@ -176,16 +143,7 @@ class DecLit extends Expression {
   DecLit(this.value, [this.position]);
 
   @override
-  operator ==(o) {
-    if (o is DecLit) {
-      return o.value == value;
-    } else {
-      return false;
-    }
-  }
-
-  @override
-  int get hashCode => value.hashCode;
+  List<Object?> get props => [value, position];
 }
 
 class VarDeclaration extends Statement {
@@ -196,16 +154,7 @@ class VarDeclaration extends Statement {
   VarDeclaration(this.varName, this.value, [this.position]);
 
   @override
-  operator ==(o) {
-    if (o is VarDeclaration) {
-      return o.value == value && o.varName == varName;
-    } else {
-      return false;
-    }
-  }
-
-  @override
-  int get hashCode => Object.hashAll([varName, value]);
+  List<Object?> get props => [varName, value, position];
 }
 
 class Assignment extends Statement {
@@ -216,14 +165,5 @@ class Assignment extends Statement {
   Assignment(this.varName, this.value, [this.position]);
 
   @override
-  operator ==(o) {
-    if (o is Assignment) {
-      return o.value == value && o.varName == varName;
-    } else {
-      return false;
-    }
-  }
-
-  @override
-  int get hashCode => Object.hashAll([varName, value]);
+  List<Object?> get props => [varName, value, position];
 }

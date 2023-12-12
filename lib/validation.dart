@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:antlr4/src/util/bit_set.dart';
 import 'package:antlr4/antlr4.dart';
+import 'package:equatable/equatable.dart';
 
 import 'package:pizza_sharp/antlr/PizzaSharpLexer.dart';
 import 'package:pizza_sharp/antlr/PizzaSharpParser.dart';
@@ -17,11 +18,14 @@ extension NodeProcessExtension on Node {
   }
 }
 
-class Error {
+class Error with EquatableMixin {
   final String message;
   final Point position;
 
   Error(this.message, this.position);
+
+  @override
+  List<Object?> get props => [message, position];
 }
 
 extension ScriptFileValidator on ScriptFile {
@@ -82,13 +86,16 @@ extension ScriptFileValidator on ScriptFile {
   }
 }
 
-class AntlrParsingResult {
+class AntlrParsingResult with EquatableMixin {
   final ScriptFileContext? root;
   final List<Error> errors;
 
   AntlrParsingResult(this.root, this.errors);
 
   bool isCorrect() => errors.isEmpty && root != null;
+
+  @override
+  List<Object?> get props => [root, errors];
 }
 
 extension StringToStreamExtension on String {
@@ -182,13 +189,16 @@ final class PizzaSharpAntlrParserFacade {
   }
 }
 
-class ParsingResult {
+class ParsingResult with EquatableMixin {
   final ScriptFile? root;
   final List<Error> errors;
 
   ParsingResult(this.root, this.errors);
 
   bool isCorrect() => errors.isEmpty && root != null;
+
+  @override
+  List<Object?> get props => [root, errors];
 }
 
 final class PizzaSharpParserFacade {
