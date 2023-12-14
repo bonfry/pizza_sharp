@@ -2,7 +2,6 @@ import 'package:antlr4/antlr4.dart';
 import 'package:pizza_sharp/antlr/PizzaSharpLexer.dart';
 import 'package:pizza_sharp/antlr/PizzaSharpParser.dart';
 import 'package:pizza_sharp/ast.dart';
-import 'package:pizza_sharp/ast_mapper.dart';
 import 'package:test/test.dart';
 
 ScriptFileContext parseCode(String code) {
