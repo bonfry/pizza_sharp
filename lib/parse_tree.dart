@@ -26,7 +26,6 @@ class ParseTreeLeaf extends ParseTreeElement with EquatableMixin {
   }
 
   @override
-  // TODO: implement props
   List<Object?> get props => [text];
 }
 
@@ -34,7 +33,7 @@ class ParseTreeLeaf extends ParseTreeElement with EquatableMixin {
 // we need to first print the name of the node, then in the next lines
 // we print the children, recursively. While printing the children
 // we increase the indentation
-class ParseTreeNode extends ParseTreeElement {
+class ParseTreeNode extends ParseTreeElement with EquatableMixin {
   final String name;
   final List<ParseTreeElement> children = [];
 
